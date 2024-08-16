@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ShimmerContainer extends StatelessWidget {
+class GkShimmer extends StatelessWidget {
   final double? width;
   final double height;
   final BorderRadiusGeometry? borderRadius;
@@ -10,7 +10,7 @@ class ShimmerContainer extends StatelessWidget {
   final Color? baseColor;
   final Color? highlightColor;
 
-  const ShimmerContainer(
+  const GkShimmer(
       {super.key,
       this.width = 100,
       this.height = 100,
