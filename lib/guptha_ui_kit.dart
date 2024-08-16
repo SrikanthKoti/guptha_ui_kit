@@ -1,7 +1,7 @@
 library guptha_ui_kit;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+// core
+export './src/core/index.dart';
+
+// ui
+export './src/ui/index.dart';
