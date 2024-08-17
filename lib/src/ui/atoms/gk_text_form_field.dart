@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:guptha_ui_kit/src/core/constants/gk_colors.dart';
-import 'package:guptha_ui_kit/src/core/constants/gk_images.dart';
-import 'package:guptha_ui_kit/src/core/constants/text_styles/gk_inter_styles.dart';
+import 'package:guptha_ui_kit/src/core_imp/constants/gk_colors_imp.dart';
+import 'package:guptha_ui_kit/src/core_imp/constants/gk_images_imp.dart';
+import 'package:guptha_ui_kit/src/core_imp/constants/text_styles/gk_inter_styles_imp.dart';
 import 'package:guptha_ui_kit/src/ui/atoms/gk_image_icon_view.dart';
 
 enum InputFieldType { bordered, borderless }
@@ -15,8 +14,8 @@ class GkTextFormField extends StatefulWidget {
   final bool isPassword;
   final InputFieldType type;
   final double fontSize;
-  final Color textColor;
-  final Color cursorColor;
+  final Color? textColor;
+  final Color? cursorColor;
   final TextInputType keyboardType;
   final FontWeight fontWeight;
   final String? fontFamily;
@@ -32,6 +31,7 @@ class GkTextFormField extends StatefulWidget {
   final Radius? cursorRadius;
   final double cursorWidth;
   final int? maxLines;
+  final double borderRadius;
 
   const GkTextFormField({
     super.key,
@@ -42,9 +42,9 @@ class GkTextFormField extends StatefulWidget {
     this.isPassword = false,
     this.type = InputFieldType.bordered,
     this.fontSize = 16,
-    this.textColor = GkColors.black,
+    this.textColor,
     this.keyboardType = TextInputType.text,
-    this.cursorColor = GkColors.violet100,
+    this.cursorColor,
     this.fontWeight = FontWeight.w500,
     this.fontFamily,
     this.errorStyle,
@@ -58,6 +58,7 @@ class GkTextFormField extends StatefulWidget {
     this.style,
     this.maxLines = 1,
     this.cursorRadius,
+    this.borderRadius = 16,
   });
 
   @override
@@ -66,45 +67,48 @@ class GkTextFormField extends StatefulWidget {
 
 class _GkTextFormFieldState extends State<GkTextFormField> {
   bool _obscureText = true;
+  final GkColorsImp _gkColors = GkColorsImp();
+  final GkInterStylesImp _gkInterStyles = GkInterStylesImp();
+  final GkImagesImp _gkImages = GkImagesImp();
 
   InputDecoration _getDecoration() {
     if (widget.type == InputFieldType.borderless) {
       return InputDecoration(
-        errorStyle: widget.errorStyle ?? GkInterStyles.tffError,
+        errorStyle: widget.errorStyle ?? _gkInterStyles.tffError,
         border: InputBorder.none,
         prefixIconConstraints: widget.prefixIconConstraints,
         prefixIcon: widget.prefixIcon,
         hintText: widget.hintText,
         hintStyle: widget.hintStyle ??
-            GkInterStyles.tffHint.copyWith(
+            _gkInterStyles.tffHint.copyWith(
               fontWeight: widget.fontWeight,
               fontSize: widget.fontSize,
-              color: widget.textColor,
+              color: widget.textColor ?? _gkColors.black,
             ),
       );
     }
     return InputDecoration(
       border: widget.border ??
           OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(16.r)),
-            borderSide: const BorderSide(color: GkColors.baseLight40, width: 1),
+            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
+            borderSide: BorderSide(color: _gkColors.baseLight40, width: 1),
           ),
       enabledBorder: widget.enabledBorder ??
           OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(16.r)),
-            borderSide: const BorderSide(color: GkColors.baseLight40, width: 1),
+            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
+            borderSide: BorderSide(color: _gkColors.baseLight40, width: 1),
           ),
       focusedBorder: widget.focusedBorder ??
           OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(16.r)),
-            borderSide: const BorderSide(color: GkColors.violet100, width: 2),
+            borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
+            borderSide: BorderSide(color: _gkColors.violet100, width: 2),
           ),
       hintText: widget.hintText,
       hintStyle: widget.hintStyle ??
-          GkInterStyles.tffHint.copyWith(
+          _gkInterStyles.tffHint.copyWith(
             fontWeight: widget.fontWeight,
             fontSize: widget.fontSize,
-            color: widget.textColor,
+            color: widget.textColor ?? _gkColors.black,
           ),
       suffixIcon: widget.isPassword
           ? GestureDetector(
@@ -114,10 +118,10 @@ class _GkTextFormFieldState extends State<GkTextFormField> {
                 });
               },
               child: GkImageIconView(
-                assetPath: GkImages.show,
-                iconColor: _obscureText ? GkColors.baseLight20 : GkColors.violet100,
-                dHeight: 12.h,
-                dWidth: 21.w,
+                assetPath: _gkImages.show,
+                iconColor: _obscureText ? _gkColors.baseLight20 : _gkColors.violet100,
+                dHeight: 12,
+                dWidth: 21,
                 fit: BoxFit.scaleDown,
               ),
             )
@@ -130,12 +134,12 @@ class _GkTextFormFieldState extends State<GkTextFormField> {
     return TextFormField(
       decoration: _getDecoration(),
       obscureText: widget.isPassword ? _obscureText : false,
-      cursorColor: widget.cursorColor,
+      cursorColor: widget.cursorColor ?? _gkColors.violet100,
       style: widget.style ??
-          GkInterStyles.bodyTwo.copyWith(
+          _gkInterStyles.bodyTwo.copyWith(
             fontWeight: widget.fontWeight,
             fontSize: widget.fontSize,
-            color: widget.textColor,
+            color: widget.textColor ?? _gkColors.black,
             height: 1,
           ),
       onTapOutside: (event) {

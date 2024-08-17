@@ -1,114 +1,119 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:guptha_ui_kit/src/core/constants/gk_colors.dart';
 
-class GkInterStyles {
-  static const String _fontFamily = 'Inter';
-  static TextStyle get tiny => TextStyle(
-        fontSize: 12.sp,
+abstract class GkInterStyles {
+  double fontSizeAdjustment(double fontSize);
+  GkColors getGkColorsInstance();
+  String getFontFamily() {
+    return 'Inter';
+  }
+
+  String fontFamily = 'Inter';
+  TextStyle get tiny => TextStyle(
+        fontSize: fontSizeAdjustment(12),
         fontWeight: FontWeight.w500,
-        color: GkColors.dark75,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().dark75,
+        fontFamily: fontFamily,
       );
-  static TextStyle get small => TextStyle(
-        fontSize: 13.sp,
+  TextStyle get small => TextStyle(
+        fontSize: fontSizeAdjustment(13),
         fontWeight: FontWeight.w500,
-        color: GkColors.dark75,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().dark75,
+        fontFamily: fontFamily,
       );
 
-  static TextStyle get bodyThree => TextStyle(
-        fontSize: 14.sp,
+  TextStyle get bodyThree => TextStyle(
+        fontSize: fontSizeAdjustment(14),
         fontWeight: FontWeight.w500,
-        color: GkColors.dark75,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().dark75,
+        fontFamily: fontFamily,
       );
-  static TextStyle get bodyTwo => TextStyle(
-        fontSize: 16.sp,
+  TextStyle get bodyTwo => TextStyle(
+        fontSize: fontSizeAdjustment(16),
         fontWeight: FontWeight.w600,
-        color: GkColors.dark75,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().dark75,
+        fontFamily: fontFamily,
       );
-  static TextStyle get bodyOne => TextStyle(
-        fontSize: 16.sp,
+  TextStyle get bodyOne => TextStyle(
+        fontSize: fontSizeAdjustment(16),
         fontWeight: FontWeight.w500,
-        color: GkColors.dark75,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().dark75,
+        fontFamily: fontFamily,
       );
-  static TextStyle get titleThree => TextStyle(
-        fontSize: 18.sp,
+  TextStyle get titleThree => TextStyle(
+        fontSize: fontSizeAdjustment(18),
         fontWeight: FontWeight.w600,
-        color: GkColors.dark75,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().dark75,
+        fontFamily: fontFamily,
       );
-  static TextStyle get titleTwo => TextStyle(
-        fontSize: 24.sp,
+  TextStyle get titleTwo => TextStyle(
+        fontSize: fontSizeAdjustment(24),
         fontWeight: FontWeight.w700,
-        color: GkColors.dark75,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().dark75,
+        fontFamily: fontFamily,
       );
-  static TextStyle get titleOne => TextStyle(
-        fontSize: 32.sp,
+  TextStyle get titleOne => TextStyle(
+        fontSize: fontSizeAdjustment(32),
         fontWeight: FontWeight.w700,
-        color: GkColors.dark75,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().dark75,
+        fontFamily: fontFamily,
       );
-  static TextStyle get titleX => TextStyle(
-        fontSize: 64.sp,
+  TextStyle get titleX => TextStyle(
+        fontSize: fontSizeAdjustment(64),
         fontWeight: FontWeight.w700,
-        color: GkColors.dark75,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().dark75,
+        fontFamily: fontFamily,
       );
-  static TextStyle get s34_base_dark_50 => TextStyle(
-        fontSize: 34.sp,
+  TextStyle get s34_base_dark_50 => TextStyle(
+        fontSize: fontSizeAdjustment(34),
         fontWeight: FontWeight.w500,
-        color: GkColors.baseDark50,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().baseDark50,
+        fontFamily: fontFamily,
       );
-  static TextStyle get s10_w500_violet_100 => TextStyle(
-        fontSize: 10.sp,
+  TextStyle get s10_w500_violet_100 => TextStyle(
+        fontSize: fontSizeAdjustment(10),
         fontWeight: FontWeight.bold,
-        color: GkColors.violet100,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().violet100,
+        fontFamily: fontFamily,
       );
-  static TextStyle get s10_bold_c6c6c6 => TextStyle(
-        fontSize: 10.sp,
+  TextStyle get s10_bold_c6c6c6 => TextStyle(
+        fontSize: fontSizeAdjustment(10),
         fontWeight: FontWeight.bold,
-        color: GkColors.color_c6c6c6,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().color_c6c6c6,
+        fontFamily: fontFamily,
       );
-  static TextStyle get s14_w500_base_light_20 => TextStyle(
-        fontSize: 14.sp,
+  TextStyle get s14_w500_base_light_20 => TextStyle(
+        fontSize: fontSizeAdjustment(14),
         fontWeight: FontWeight.w500,
-        color: GkColors.baseLight20,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().baseLight20,
+        fontFamily: fontFamily,
       );
-  static TextStyle get s24_w500_light_100 => TextStyle(
-        fontSize: 24.sp,
+  TextStyle get s24_w500_light_100 => TextStyle(
+        fontSize: fontSizeAdjustment(24),
         fontWeight: FontWeight.w500,
-        color: GkColors.baseLight100,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().baseLight100,
+        fontFamily: fontFamily,
       );
-  static TextStyle get s40_w600_base_dark_75 => TextStyle(
-        fontSize: 40.sp,
+  TextStyle get s40_w600_base_dark_75 => TextStyle(
+        fontSize: fontSizeAdjustment(40),
         fontWeight: FontWeight.w600,
-        color: GkColors.baseDark75,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().baseDark75,
+        fontFamily: fontFamily,
       );
 
   // gk_text_form_field
-  static TextStyle get tffError => TextStyle(
-        fontSize: 12.sp,
+  TextStyle get tffError => TextStyle(
+        fontSize: fontSizeAdjustment(12),
         fontWeight: FontWeight.w500,
-        color: GkColors.red100,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().red100,
+        fontFamily: fontFamily,
       );
-  static TextStyle get tffHint => TextStyle(
-        fontSize: 16.sp,
+  TextStyle get tffHint => TextStyle(
+        fontSize: fontSizeAdjustment(16),
         fontWeight: FontWeight.w600,
-        color: GkColors.dark75,
-        fontFamily: _fontFamily,
+        color: getGkColorsInstance().dark75,
+        fontFamily: fontFamily,
       );
 }
