@@ -1,8 +1,10 @@
 // ignore_for_file: non_constant_identifier_names, prefer_interpolation_to_compose_strings
 
+import 'package:flutter/foundation.dart';
+
 abstract class GkImages {
-  String get baseIconPath => "assets/icons/";
-  String get baseImagePath => "assets/images/";
+  String get baseIconPath => (kDebugMode && kIsWeb) ? "assets/assets/icons/" : "assets/icons/";
+  String get baseImagePath => (kDebugMode && kIsWeb) ? "assets/assets/images/" : "assets/images/";
 
   String get email => baseIconPath + 'mail.svg';
 
