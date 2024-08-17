@@ -32,14 +32,19 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          GkTextFormField(
-            controller: TextEditingController(),
-            isPassword: true,
-            width: 300,
-          )
-        ],
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GkTextFormField(
+              controller: TextEditingController(),
+              isPassword: true,
+              width: 300,
+              label: "Password",
+            )
+          ],
+        ),
       ),
     );
   }

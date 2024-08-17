@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:guptha_ui_kit/src/core_imp/constants/gk_colors_imp.dart';
 import 'package:guptha_ui_kit/src/core_imp/constants/gk_images_imp.dart';
+import 'package:guptha_ui_kit/src/core_imp/constants/gk_spacers_imp.dart';
 import 'package:guptha_ui_kit/src/core_imp/constants/text_styles/gk_inter_styles_imp.dart';
 import 'package:guptha_ui_kit/src/ui/atoms/gk_image_icon_view.dart';
 
@@ -32,6 +33,8 @@ class GkTextFormField extends StatefulWidget {
   final double cursorWidth;
   final int? maxLines;
   final double borderRadius;
+  final String label;
+  final TextStyle? labelStyle;
 
   const GkTextFormField({
     super.key,
@@ -60,6 +63,8 @@ class GkTextFormField extends StatefulWidget {
     this.cursorRadius,
     this.borderRadius = 16,
     this.width,
+    this.label = '',
+    this.labelStyle,
   });
 
   @override
@@ -134,27 +139,39 @@ class _GkTextFormFieldState extends State<GkTextFormField> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: widget.width,
-      child: TextFormField(
-        decoration: _getDecoration(),
-        obscureText: widget.isPassword ? _obscureText : false,
-        cursorColor: widget.cursorColor ?? _gkColors.violet100,
-        style: widget.style ??
-            _gkInterStyles.bodyTwo.copyWith(
-              fontWeight: widget.fontWeight,
-              fontSize: widget.fontSize,
-              color: widget.textColor ?? _gkColors.black,
-              height: 1,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (widget.label.isNotEmpty) ...[
+            Text(
+              widget.label,
+              style: widget.labelStyle ?? GkInterStylesImp().tiny,
             ),
-        onTapOutside: (event) {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
-        maxLines: widget.maxLines,
-        cursorRadius: widget.cursorRadius ?? const Radius.circular(100),
-        cursorWidth: widget.cursorWidth,
-        keyboardType: widget.keyboardType,
-        controller: widget.controller,
-        autovalidateMode: widget.autoValidateMode,
-        validator: widget.validator,
+            GkSpacersImp().height4
+          ],
+          TextFormField(
+            decoration: _getDecoration(),
+            obscureText: widget.isPassword ? _obscureText : false,
+            cursorColor: widget.cursorColor ?? _gkColors.violet100,
+            style: widget.style ??
+                _gkInterStyles.bodyTwo.copyWith(
+                  fontWeight: widget.fontWeight,
+                  fontSize: widget.fontSize,
+                  color: widget.textColor ?? _gkColors.black,
+                  height: 1,
+                ),
+            onTapOutside: (event) {
+              FocusManager.instance.primaryFocus?.unfocus();
+            },
+            maxLines: widget.maxLines,
+            cursorRadius: widget.cursorRadius ?? const Radius.circular(100),
+            cursorWidth: widget.cursorWidth,
+            keyboardType: widget.keyboardType,
+            controller: widget.controller,
+            autovalidateMode: widget.autoValidateMode,
+            validator: widget.validator,
+          ),
+        ],
       ),
     );
   }
