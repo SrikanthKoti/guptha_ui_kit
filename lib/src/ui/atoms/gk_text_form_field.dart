@@ -27,7 +27,7 @@ class GkTextFormField extends StatefulWidget {
   final InputBorder? focusedBorder;
   final TextStyle? hintStyle;
   final TextStyle? style;
-
+  final double? width;
   final Radius? cursorRadius;
   final double cursorWidth;
   final int? maxLines;
@@ -59,6 +59,7 @@ class GkTextFormField extends StatefulWidget {
     this.maxLines = 1,
     this.cursorRadius,
     this.borderRadius = 16,
+    this.width,
   });
 
   @override
@@ -131,27 +132,30 @@ class _GkTextFormFieldState extends State<GkTextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      decoration: _getDecoration(),
-      obscureText: widget.isPassword ? _obscureText : false,
-      cursorColor: widget.cursorColor ?? _gkColors.violet100,
-      style: widget.style ??
-          _gkInterStyles.bodyTwo.copyWith(
-            fontWeight: widget.fontWeight,
-            fontSize: widget.fontSize,
-            color: widget.textColor ?? _gkColors.black,
-            height: 1,
-          ),
-      onTapOutside: (event) {
-        FocusManager.instance.primaryFocus?.unfocus();
-      },
-      maxLines: widget.maxLines,
-      cursorRadius: widget.cursorRadius ?? const Radius.circular(100),
-      cursorWidth: widget.cursorWidth,
-      keyboardType: widget.keyboardType,
-      controller: widget.controller,
-      autovalidateMode: widget.autoValidateMode,
-      validator: widget.validator,
+    return SizedBox(
+      width: widget.width,
+      child: TextFormField(
+        decoration: _getDecoration(),
+        obscureText: widget.isPassword ? _obscureText : false,
+        cursorColor: widget.cursorColor ?? _gkColors.violet100,
+        style: widget.style ??
+            _gkInterStyles.bodyTwo.copyWith(
+              fontWeight: widget.fontWeight,
+              fontSize: widget.fontSize,
+              color: widget.textColor ?? _gkColors.black,
+              height: 1,
+            ),
+        onTapOutside: (event) {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        maxLines: widget.maxLines,
+        cursorRadius: widget.cursorRadius ?? const Radius.circular(100),
+        cursorWidth: widget.cursorWidth,
+        keyboardType: widget.keyboardType,
+        controller: widget.controller,
+        autovalidateMode: widget.autoValidateMode,
+        validator: widget.validator,
+      ),
     );
   }
 }
