@@ -3,8 +3,8 @@
 import 'package:flutter/foundation.dart';
 
 abstract class GkImages {
-  String get baseIconPath => (kDebugMode && kIsWeb) ? "assets/assets/icons/" : "assets/icons/";
-  String get baseImagePath => (kDebugMode && kIsWeb) ? "assets/assets/images/" : "assets/images/";
+  String get baseIconPath => "${(kDebugMode && kIsWeb) ? "" : "assets/"}icons/";
+  String get baseImagePath => "${(kDebugMode && kIsWeb) ? "" : "assets/"}images/";
 
   String get email => baseIconPath + 'mail.svg';
 
