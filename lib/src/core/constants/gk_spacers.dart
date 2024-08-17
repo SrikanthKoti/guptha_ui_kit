@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GkSpacers {
   static double heightAdjuster(double height) {
-    return height;
+    return height.h;
   }
 
   static double widthAdjuster(double width) {
-    return width;
+    return width.w;
   }
 
   static Widget height2 = SizedBox(height: heightAdjuster(2));
