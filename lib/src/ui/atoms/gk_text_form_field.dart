@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:guptha_ui_kit/src/core_imp/constants/gk_colors_imp.dart';
-import 'package:guptha_ui_kit/src/core_imp/constants/gk_images_imp.dart';
 import 'package:guptha_ui_kit/src/core_imp/constants/gk_spacers_imp.dart';
 import 'package:guptha_ui_kit/src/core_imp/constants/text_styles/gk_inter_styles_imp.dart';
 import 'package:guptha_ui_kit/src/ui/atoms/gk_image_icon_view.dart';
+import 'package:guptha_ui_kit/src/ui/ui_imports.dart';
 
 enum InputFieldType { bordered, borderless }
 
@@ -73,23 +72,20 @@ class GkTextFormField extends StatefulWidget {
 
 class _GkTextFormFieldState extends State<GkTextFormField> {
   bool _obscureText = true;
-  final GkColorsImp _gkColors = GkColorsImp();
-  final GkInterStylesImp _gkInterStyles = GkInterStylesImp();
-  final GkImagesImp _gkImages = GkImagesImp();
 
   InputDecoration _getDecoration() {
     if (widget.type == InputFieldType.borderless) {
       return InputDecoration(
-        errorStyle: widget.errorStyle ?? _gkInterStyles.tffError,
+        errorStyle: widget.errorStyle ?? gkInterStyles.tffError,
         border: InputBorder.none,
         prefixIconConstraints: widget.prefixIconConstraints,
         prefixIcon: widget.prefixIcon,
         hintText: widget.hintText,
         hintStyle: widget.hintStyle ??
-            _gkInterStyles.tffHint.copyWith(
+            gkInterStyles.tffHint.copyWith(
               fontWeight: widget.fontWeight,
               fontSize: widget.fontSize,
-              color: widget.textColor ?? _gkColors.black,
+              color: widget.textColor ?? gkColors.black,
             ),
       );
     }
@@ -97,24 +93,24 @@ class _GkTextFormFieldState extends State<GkTextFormField> {
       border: widget.border ??
           OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
-            borderSide: BorderSide(color: _gkColors.baseLight40, width: 1),
+            borderSide: BorderSide(color: gkColors.baseLight40, width: 1),
           ),
       enabledBorder: widget.enabledBorder ??
           OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
-            borderSide: BorderSide(color: _gkColors.baseLight40, width: 1),
+            borderSide: BorderSide(color: gkColors.baseLight40, width: 1),
           ),
       focusedBorder: widget.focusedBorder ??
           OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
-            borderSide: BorderSide(color: _gkColors.violet100, width: 2),
+            borderSide: BorderSide(color: gkColors.violet100, width: 2),
           ),
       hintText: widget.hintText,
       hintStyle: widget.hintStyle ??
-          _gkInterStyles.tffHint.copyWith(
+          gkInterStyles.tffHint.copyWith(
             fontWeight: widget.fontWeight,
             fontSize: widget.fontSize,
-            color: widget.textColor ?? _gkColors.black,
+            color: widget.textColor ?? gkColors.black,
           ),
       suffixIcon: widget.isPassword
           ? GestureDetector(
@@ -124,8 +120,8 @@ class _GkTextFormFieldState extends State<GkTextFormField> {
                 });
               },
               child: GkImageIconView(
-                assetPath: _gkImages.show,
-                iconColor: _obscureText ? _gkColors.baseLight20 : _gkColors.violet100,
+                assetPath: gkImages.show,
+                iconColor: _obscureText ? gkColors.baseLight20 : gkColors.violet100,
                 dHeight: 12,
                 dWidth: 21,
                 fit: BoxFit.scaleDown,
@@ -152,12 +148,12 @@ class _GkTextFormFieldState extends State<GkTextFormField> {
           TextFormField(
             decoration: _getDecoration(),
             obscureText: widget.isPassword ? _obscureText : false,
-            cursorColor: widget.cursorColor ?? _gkColors.violet100,
+            cursorColor: widget.cursorColor ?? gkColors.violet100,
             style: widget.style ??
-                _gkInterStyles.bodyTwo.copyWith(
+                gkInterStyles.bodyTwo.copyWith(
                   fontWeight: widget.fontWeight,
                   fontSize: widget.fontSize,
-                  color: widget.textColor ?? _gkColors.black,
+                  color: widget.textColor ?? gkColors.black,
                   height: 1,
                 ),
             onTapOutside: (event) {
