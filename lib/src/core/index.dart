@@ -1,6 +1,8 @@
 // apis
 export './apis/gk_http_client.dart';
 export 'apis/gk_poller.dart';
+export 'apis/gk_api.dart';
+export 'apis/gk_result.dart';
 
 // extension
 export './extensions/gk_string_extensions.dart';

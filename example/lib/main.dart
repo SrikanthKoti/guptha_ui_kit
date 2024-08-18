@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(),
+      builder: GkOverlayManager.transitionBuilder(),
     );
   }
 }
@@ -32,6 +33,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        Helper().showCustomLoader();
+        Future.delayed(const Duration(seconds: 5), () {
+          Helper().hideLoader();
+        });
+      }),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,5 +54,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+}
+
+class Helper extends GkHelper {
+  showCustomLoader() {
+    showLoader();
   }
 }

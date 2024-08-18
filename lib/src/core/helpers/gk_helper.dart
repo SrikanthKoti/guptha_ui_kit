@@ -78,11 +78,12 @@ abstract class GkHelper {
   showLoader({double opacity = 0.25, Color color = Colors.white, Widget? loaderWidget}) async {
     GkOverlayManager.showLoader(opacity: opacity, color: color, loaderWidget: loaderWidget);
     //20 ms delay for postFrameCallback scheduling
-    await Future.delayed(const Duration(milliseconds: 20));
+    await Future.delayed(const Duration(milliseconds: 50));
     // }
   }
 
-  hideLoader() {
+  hideLoader() async {
+    await Future.delayed(const Duration(milliseconds: 50));
     GkOverlayManager.hideOverlay();
   }
 
