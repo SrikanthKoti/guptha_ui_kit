@@ -4,11 +4,13 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:guptha_ui_kit/src/ui/atoms/gk_toast_widget.dart';
+import 'package:guptha_ui_kit/src/ui/overlay_manager.dart';
 
-class GkHelper {
-  static String _strAppVersion = '';
+abstract class GkHelper {
+  String _strAppVersion = '';
 
-  static void printJson(String input) {
+  void printJson(String input) {
     if (kDebugMode) {
       var decoded = const JsonDecoder().convert(input);
       var prettyJson = const JsonEncoder.withIndent(' ').convert(decoded);
@@ -16,52 +18,52 @@ class GkHelper {
     }
   }
 
-  static EdgeInsets getStatusBarSize(BuildContext context) {
+  EdgeInsets getStatusBarSize(BuildContext context) {
     return MediaQuery.of(context).padding;
   }
 
-  static double getScreenWidth(BuildContext context) {
+  double getScreenWidth(BuildContext context) {
     return MediaQuery.of(context).size.width;
   }
 
-  static double getScreenHeight(BuildContext context) {
+  double getScreenHeight(BuildContext context) {
     return MediaQuery.of(context).size.height;
   }
 
-  static Brightness getCurrentAppTheme(context) {
+  Brightness getCurrentAppTheme(context) {
     return SchedulerBinding.instance.platformDispatcher.platformBrightness;
   }
 
-  static getAppTextTheme(context) {
+  getAppTextTheme(context) {
     return Theme.of(context).textTheme;
   }
 
-  static void dismissKeypad(BuildContext context) {
+  void dismissKeypad(BuildContext context) {
     FocusScope.of(context).unfocus();
   }
 
-  static printLogs(dynamic strData) {
+  printLogs(dynamic strData) {
     if (kDebugMode) {
       print(strData);
     }
   }
 
-  static setAppVersion(String strAppVersion) {
+  setAppVersion(String strAppVersion) {
     _strAppVersion = strAppVersion;
   }
 
-  static getAppVersion() {
+  getAppVersion() {
     return _strAppVersion;
   }
 
-  static bool isSvg(String assetPath) {
+  bool isSvg(String assetPath) {
     if (assetPath.isNotEmpty && assetPath.toLowerCase().contains(".svg")) {
       return true;
     }
     return false;
   }
 
-  static bool areDatesEqual(DateTime? date1, DateTime? date2) {
+  bool areDatesEqual(DateTime? date1, DateTime? date2) {
     if (date1 == null || date2 == null) {
       return false;
     } else {
@@ -69,7 +71,26 @@ class GkHelper {
     }
   }
 
-  static ColorFilter getSVGColor(Color color) {
+  ColorFilter getSVGColor(Color color) {
     return ColorFilter.mode(color, BlendMode.srcIn);
+  }
+
+  showLoader({double opacity = 0.25, Color color = Colors.white, Widget? loaderWidget}) async {
+    GkOverlayManager.showLoader(opacity: opacity, color: color, loaderWidget: loaderWidget);
+    //20 ms delay for postFrameCallback scheduling
+    await Future.delayed(const Duration(milliseconds: 20));
+    // }
+  }
+
+  hideLoader() {
+    GkOverlayManager.hideOverlay();
+  }
+
+  showToast(
+      {required String msg,
+      ToastType type = ToastType.error,
+      ToastDuration duration = ToastDuration.medium,
+      Widget? toastWidget}) {
+    GkOverlayManager.showToast(type: type, msg: msg, duration: duration, toastWidget: toastWidget);
   }
 }

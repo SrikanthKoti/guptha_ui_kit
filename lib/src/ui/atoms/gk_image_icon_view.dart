@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:guptha_ui_kit/src/core/helpers/gk_helper.dart';
 import 'package:guptha_ui_kit/src/ui/atoms/gk_shimmer.dart';
+import 'package:guptha_ui_kit/src/ui/ui_imports.dart';
 
 class GkImageIconView extends StatelessWidget {
   final String? assetPath;
@@ -39,13 +39,13 @@ class GkImageIconView extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(dBorderRadius),
         child: assetPath != null
-            ? GkHelper.isSvg(assetPath!)
+            ? gkHelperImp.isSvg(assetPath!)
                 ? SvgPicture.asset(
                     assetPath!,
                     height: dHeight,
                     width: dWidth,
                     fit: fit,
-                    colorFilter: iconColor != null ? GkHelper.getSVGColor(iconColor!) : null,
+                    colorFilter: iconColor != null ? gkHelperImp.getSVGColor(iconColor!) : null,
                   )
                 : Image.asset(
                     assetPath ?? "",
@@ -68,7 +68,7 @@ class GkImageIconView extends StatelessWidget {
                                 height: dHeight ?? double.infinity,
                               )
                             : const SizedBox.shrink(),
-                        colorFilter: iconColor != null ? GkHelper.getSVGColor(iconColor!) : null,
+                        colorFilter: iconColor != null ? gkHelperImp.getSVGColor(iconColor!) : null,
                       )
                     : CachedNetworkImage(
                         imageUrl: networkPath!,
