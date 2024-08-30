@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:guptha_ui_kit/src/ui/atoms/gk_toast_widget.dart';
 import 'package:guptha_ui_kit/src/ui/overlay_manager.dart';
+import 'package:uuid/uuid.dart';
 
 abstract class GkHelper {
   String _strAppVersion = '';
@@ -93,5 +94,9 @@ abstract class GkHelper {
       ToastDuration duration = ToastDuration.medium,
       Widget? toastWidget}) {
     GkOverlayManager.showToast(type: type, msg: msg, duration: duration, toastWidget: toastWidget);
+  }
+
+  uuidV4() {
+    return const Uuid().v4();
   }
 }

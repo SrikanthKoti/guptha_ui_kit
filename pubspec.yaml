@@ -1,6 +1,6 @@
 name: guptha_ui_kit
 description: "Guptha Ui Kit to help you get started with your new flutter project"
-version: 0.0.11
+version: 0.0.12
 homepage: https://github.com/SrikanthKoti/guptha_ui_kit
 
 environment:
@@ -15,6 +15,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   cached_network_image: ^3.3.0
   internet_connection_checker: ^2.0.0
+  uuid: ^4.4.2
 
 dev_dependencies:
   flutter_test:

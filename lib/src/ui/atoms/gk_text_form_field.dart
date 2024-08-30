@@ -4,7 +4,7 @@ import 'package:guptha_ui_kit/src/core_imp/constants/text_styles/gk_inter_styles
 import 'package:guptha_ui_kit/src/ui/atoms/gk_image_icon_view.dart';
 import 'package:guptha_ui_kit/src/ui/ui_imports.dart';
 
-enum InputFieldType { bordered, borderless }
+enum InputFieldType { bordered, borderless, custom }
 
 class GkTextFormField extends StatefulWidget {
   final TextEditingController controller;
@@ -28,13 +28,14 @@ class GkTextFormField extends StatefulWidget {
   final TextStyle? hintStyle;
   final TextStyle? style;
   final double? width;
+  final double? height;
   final Radius? cursorRadius;
   final double cursorWidth;
   final int? maxLines;
   final double borderRadius;
   final String label;
   final TextStyle? labelStyle;
-
+  final InputDecoration? decoration;
   const GkTextFormField({
     super.key,
     required this.controller,
@@ -64,6 +65,8 @@ class GkTextFormField extends StatefulWidget {
     this.width,
     this.label = '',
     this.labelStyle,
+    this.decoration,
+    this.height,
   });
 
   @override
@@ -74,6 +77,9 @@ class _GkTextFormFieldState extends State<GkTextFormField> {
   bool _obscureText = true;
 
   InputDecoration _getDecoration() {
+    if (widget.type == InputFieldType.custom) {
+      return widget.decoration ?? const InputDecoration();
+    }
     if (widget.type == InputFieldType.borderless) {
       return InputDecoration(
         errorStyle: widget.errorStyle ?? gkInterStyles.tffError,
@@ -135,6 +141,7 @@ class _GkTextFormFieldState extends State<GkTextFormField> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: widget.width,
+      height: widget.height,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
