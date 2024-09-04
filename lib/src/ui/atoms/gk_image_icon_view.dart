@@ -45,15 +45,32 @@ class GkImageIconView extends StatelessWidget {
                     height: dHeight,
                     width: dWidth,
                     fit: fit,
+                    placeholderBuilder: (context) => showPlaceHolder
+                        ? GkShimmer(
+                            width: dWidth,
+                            height: dHeight ?? double.infinity,
+                          )
+                        : const SizedBox.shrink(),
                     colorFilter: iconColor != null ? gkHelperImp.getSVGColor(iconColor!) : null,
                   )
-                : Image.asset(
-                    assetPath ?? "",
-                    height: dHeight,
-                    width: dWidth,
-                    fit: fit,
-                    scale: dScale,
-                    color: iconColor,
+                : FutureBuilder(
+                    future: _loadImage(context),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+                        return Image.asset(
+                          assetPath ?? "",
+                          height: dHeight,
+                          width: dWidth,
+                          fit: fit,
+                          scale: dScale,
+                          color: iconColor,
+                        );
+                      }
+                      return GkShimmer(
+                        width: dWidth,
+                        height: dHeight ?? double.infinity,
+                      );
+                    },
                   )
             : (networkPath != null && networkPath!.isNotEmpty)
                 ? isNetworkSvg
@@ -92,5 +109,9 @@ class GkImageIconView extends StatelessWidget {
                 : Container(),
       ),
     );
+  }
+
+  Future<void> _loadImage(BuildContext context) async {
+    await precacheImage(AssetImage(assetPath ?? ""), context);
   }
 }
