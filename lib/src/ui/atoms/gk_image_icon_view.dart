@@ -56,7 +56,7 @@ class GkImageIconView extends StatelessWidget {
                 : FutureBuilder(
                     future: _loadImage(context),
                     builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+                      if (snapshot.connectionState == ConnectionState.done) {
                         return Image.asset(
                           assetPath ?? "",
                           height: dHeight,
